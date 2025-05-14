@@ -1,4 +1,4 @@
-# 🧠 Multimodal RAG System
+# Multimodal RAG System
 
 This repository contains a lightweight, modular Retrieval-Augmented Generation (RAG) system that supports **multimodal PDFs** containing text, tables, and images. It allows users to upload academic or research PDFs, extract and index their content, and query the documents using a language model grounded in retrieved evidence.
 
@@ -6,12 +6,12 @@ This repository contains a lightweight, modular Retrieval-Augmented Generation (
 
 ## ✨ Features
 
-- ✅ Handles text, table (markdown), and image (caption + visual summary) content
-- ⚡ Converts PDF content into 384-dimensional dense embeddings (IBM Granite)
-- 📁 Stores and retrieves documents using FAISS for fast semantic search
-- 🧠 Integrates a language model to generate grounded answers with citations
-- 💾 Uses metadata caching to avoid redundant reprocessing
-- 🖥️ Includes a Gradio-based UI for uploading PDFs and asking questions
+- Handles text, table (markdown), and image (caption + visual summary) content
+- Converts PDF content into 384-dimensional dense embeddings (IBM Granite)
+- Stores and retrieves documents using FAISS for fast semantic search
+- Integrates a language model to generate grounded answers with citations
+- Uses metadata caching to avoid redundant reprocessing
+- Includes a Gradio-based UI for uploading PDFs and asking questions
 
 ---
 
@@ -27,9 +27,9 @@ This repository contains a lightweight, modular Retrieval-Augmented Generation (
 │   ├── pipeline.py          # RAGPipeline class: wraps ingestion + querying
 │   └── query.py             # Prompt templates and retrieval logic
 ├── app.py                   # Gradio interface
-├── initial_ingest.py        # CLI script to ingest all PDFs in batch
+├── initial_ingest.py        # CLI script to ingest all PDFs in batch only for the initial run
 ├── requirements.txt         # Python dependencies
-└── .env.template            # Example environment file (e.g., Replicate API token)
+└── .env.template            # Reading the API token
 ```
 
 ---
@@ -44,14 +44,14 @@ cd multimodal-rag
 
 2. **Set up your environment**
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 3. **Configure environment variables**
 
-Copy the `.env.template` file to `.env` and insert your Replicate API key or any other required secrets:
+Copy the `.env.template` file to `.env` and insert your API key :
 ```bash
 cp .env.template .env
 ```
