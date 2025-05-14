@@ -41,11 +41,7 @@ def build_context_with_meta(docs: List) -> str:
         m = d.metadata
         # Base tag
         tag = f"[{m['filename']} | p.{m['pages']} | {m['type']}]"
-        # If table/image, include index
-        if m["type"] == "table":
-            tag = f"[{m['filename']} | p.{m['pages']}]"
-        if m["type"] == "image" and m.get("image_num") :
-            tag = f"[{m['filename']} | p.{m['pages']}]"
+        
         blocks.append(f"{tag}\n{d.page_content}")
     # Separate blocks by blank lines
     return "\n\n".join(blocks)

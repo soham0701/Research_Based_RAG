@@ -18,8 +18,11 @@ class RAGPipeline:
         dest = self.source_dir / pdf_path.name
         if not dest.exists():
             dest.write_bytes(pdf_path.read_bytes())
+        else:
+            return f"ℹ️Already Embedded: {pdf_path.name}"
+        
         self.index, self.cached_docs, new = ingest_new_pdfs(self.index, self.cached_docs)   # if the new variable is not returned, it means that file is already processed
-        return f"✅ Embedded: {', '.join(new)}" if new else f"ℹ️ Already: {pdf_path.name}"
+        return f"✅ Embedded: {', '.join(new)}"
 
     def query(self, query: str) -> str:
         if not query.strip():

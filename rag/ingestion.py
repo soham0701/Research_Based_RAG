@@ -28,8 +28,6 @@ class ChunkMeta(BaseModel):
     filename: str
     pages: List[int]
     type: str
-    table_num: Optional[int] = None
-    image_num: Optional[int] = None
 
     @field_validator("filename")
     def filename_must_not_be_empty(cls, v):
@@ -72,11 +70,6 @@ def convert_pdf_to_langchain(path: Path) -> list[Document]:
         chunks.append(Document(
             page_content=ch.text,
             metadata=validated_meta
-            # metadata={
-            #     "filename": path.name,
-            #     "pages":    pages,
-            #     "type":     "text",
-            # }
         ))
 
     # ─── 2) Table chunks ──────────────────────────────────────────────
@@ -103,11 +96,6 @@ def convert_pdf_to_langchain(path: Path) -> list[Document]:
         chunks.append(Document(
             page_content=table_summary,
             metadata=validated_meta
-            # metadata={
-            #     "filename": path.name,
-            #     "pages":    pages,
-            #     "type":     "text",
-            # }
         ))
 
     # ─── 3) Image chunks ──────────────────────────────────────────────
@@ -145,11 +133,6 @@ def convert_pdf_to_langchain(path: Path) -> list[Document]:
         chunks.append(Document(
             page_content=image_summary,
             metadata=validated_meta
-            # metadata={
-            #     "filename": path.name,
-            #     "pages":    pages,
-            #     "type":     "text",
-            # }
         ))
 
     return chunks
@@ -179,7 +162,7 @@ def ingest_new_pdfs(faiss_index, cached_docs):
     else:
         faiss_index.add_texts(texts, metadatas=metas)
 
-    save_cached_docs(cached_docs)  #save the docling docs in cache
+    save_cached_docs(cached_docs)  #save the langchain docs in cache
     save_faiss_index(faiss_index)  #save the index in cache
 
     return faiss_index, cached_docs, [p.name for p in to_proc]
