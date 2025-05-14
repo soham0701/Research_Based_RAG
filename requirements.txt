@@ -1,0 +1,14 @@
+git+https://github.com/ibm-granite-community/utils.git
+transformers
+pillow
+langchain_community
+langchain_huggingface
+langchain_milvus
+docling
+replicate
+tqdm
+gradio
+python-dotenv
+faiss-cpu
+pydantic>=2.0
+rouge_score
